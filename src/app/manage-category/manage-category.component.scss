@@ -1,0 +1,22 @@
+.heading{
+  padding: 8px 8px 0;
+}
+
+.example-spacer{
+  flex: 1 1 auto;
+}
+
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.toolbar-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field{
+  width: 100%;
+}

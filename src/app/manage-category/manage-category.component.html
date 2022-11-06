@@ -1,0 +1,40 @@
+<div class="heading">
+
+  <mat-card class="toolbar">
+    <span class="toolbar-text"><b>Manage Category</b></span>
+    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">Add Category</button>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" matTooltip="Edit" (click)="onEdit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card>
+
+</div>

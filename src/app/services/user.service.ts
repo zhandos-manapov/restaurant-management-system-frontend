@@ -29,5 +29,8 @@ export class UserService {
     return this.http.get(this.url + '/user/checkToken')
   }
 
+  changePassword(data: any){
+    return this.http.post<IResponse>(this.url + '/user/changePassword', data, this.options)
+  }
 
 }

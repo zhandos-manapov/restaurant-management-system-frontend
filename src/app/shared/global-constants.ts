@@ -1,4 +1,5 @@
-export class GlobalConstants {
+import { IMenu } from "./global-interface"
+export abstract class GlobalConstants {
   //Message
   public static genericError = 'Something went wrong. Please try again.'
 
@@ -13,5 +14,10 @@ export class GlobalConstants {
 
   //Variable
   public static error = 'error'
+
+  //Constants
+  public static readonly MENUITEMS: IMenu[] = [
+    {state: 'dashboard', name: 'Dashboard', icon: 'dashboard',  role: ''}
+  ]
   
 }

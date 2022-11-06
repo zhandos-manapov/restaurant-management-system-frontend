@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.ngxUiLoaderService.start()
-    const data = { ...this.loginForm.value }
-    this.userService.login(data).subscribe((res: ILoginResponse) => {
+    const formData = { ...this.loginForm.value }
+    this.userService.login(formData).subscribe((res: ILoginResponse) => {
       this.ngxUiLoaderService.stop()
       this.matDialogRef.close()
       localStorage.setItem('token', res.token)

@@ -16,14 +16,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './services/token.interceptor';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
   textColor: '#ffffff',
   textPosition: 'center-center',
-  pbColor: 'red',
-  bgsColor: 'red',
-  fgsColor: 'red',
+  pbColor: 'white',
+  bgsColor: 'white',
+  fgsColor: 'white',
   fgsType: SPINNER.ballSpinClockwise,
   fgsSize: 100,
   pbDirection: PB_DIRECTION.leftToRight,
@@ -40,13 +44,17 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HeaderComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     MaterialModule,
+    SharedModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
