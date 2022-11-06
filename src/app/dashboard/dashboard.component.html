@@ -1,51 +1,47 @@
-<body>
+<div class="heading">
+	<mat-card>
+		<b><span>Dashboard</span></b>
+	</mat-card>
+</div>
 
-	<div class="dashboard">
+<br>
+
+<div class="row">
+
+	<div class="column">
 		<mat-card>
-			<b><span>Dashboard</span></b>
+			<h2 class="title">Total Category:</h2>
+			<h1 class="title">{{data?.categoryCount}}</h1>
+			<p>
+				<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
+					View Category
+				</button>
+			</p>
 		</mat-card>
 	</div>
 
-	<br>
-
-	<div class="row">
-
-		<div class="column">
-			<mat-card>
-				<h2 class="title">Total Category:</h2>
-				<h1 class="title">{{data?.categoryCount}}</h1>
-				<p>
-					<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
-						View Category
-					</button>
-				</p>
-			</mat-card>
-		</div>
-
-		<div class="column">
-			<mat-card>
-				<h2 class="title">Total Products:</h2>
-				<h1 class="title">{{data?.productCount}}</h1>
-				<p>
-					<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
-						View Products
-					</button>
-				</p>
-			</mat-card>
-		</div>
-
-		<div class="column">
-			<mat-card>
-				<h2 class="title">Total Bill:</h2>
-				<h1 class="title">{{data?.billCount}}</h1>
-				<p>
-					<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
-						View Bill
-					</button>
-				</p>
-			</mat-card>
-		</div>
-
+	<div class="column">
+		<mat-card>
+			<h2 class="title">Total Products:</h2>
+			<h1 class="title">{{data?.productCount}}</h1>
+			<p>
+				<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
+					View Products
+				</button>
+			</p>
+		</mat-card>
 	</div>
 
-</body>
+	<div class="column">
+		<mat-card>
+			<h2 class="title">Total Bill:</h2>
+			<h1 class="title">{{data?.billCount}}</h1>
+			<p>
+				<button class="button" mat-flat-button color="primary" [routerLink]="['/cafe/category']">
+					View Bill
+				</button>
+			</p>
+		</mat-card>
+	</div>
+
+</div>

@@ -1,3 +1,15 @@
-button[mat-flat-button]{
-  padding: 5px 16px;
+button[mat-button]{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.mat-list-item{
+  height: auto !important;
+}
+
+.active{
+  background-color: #3F51B5;
+  color: white;
 }

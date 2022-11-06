@@ -12,7 +12,8 @@ const routes: Routes = [
     canActivate: [RouteGuard],
     data: { expectedRole: ['admin', 'user'] },
     children: [
-      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
+      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'category', loadChildren: () => import('./manage-category/manage-category.module').then(m => m.ManageCategoryModule) }
     ]
   }
 ];

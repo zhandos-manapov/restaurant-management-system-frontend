@@ -24,14 +24,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
   textColor: '#ffffff',
-  textPosition: 'center-center',
   pbColor: 'white',
   bgsColor: 'white',
   fgsColor: 'white',
-  fgsType: SPINNER.ballSpinClockwise,
-  fgsSize: 100,
-  pbDirection: PB_DIRECTION.leftToRight,
-  pbThickness: 5
 }
 
 @NgModule({
