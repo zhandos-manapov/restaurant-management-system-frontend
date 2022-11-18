@@ -18,7 +18,8 @@ export abstract class GlobalConstants {
   //Constants
   public static readonly MENUITEMS: IMenu[] = [
     { state: 'dashboard', name: 'Dashboard', icon: 'dashboard', role: '' },
-    { state: 'category', name: 'Manage Category', icon: 'category', role: 'admin' }
+    { state: 'category', name: 'Manage Category', icon: 'category', role: 'admin' },
+    { state: 'product', name: 'Manage Product', icon: 'inventory_2', role: 'admin'}
   ]
 
 }

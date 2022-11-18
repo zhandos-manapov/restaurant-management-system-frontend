@@ -17,8 +17,6 @@ export class CategoryFormComponent implements OnInit {
   submitEvent = new EventEmitter()
   categoryForm!: FormGroup
   dialogAction = 'add'
-
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private fb: FormBuilder,
@@ -32,7 +30,7 @@ export class CategoryFormComponent implements OnInit {
       name: [null, [Validators.required]]
     })
     this.dialogAction = this.dialogData.action
-    this.categoryForm.patchValue(this.dialogData.data)
+    if(this.dialogAction === 'update') this.categoryForm.patchValue(this.dialogData.data)
   }
 
   onSubmit() {

@@ -13,7 +13,8 @@ const routes: Routes = [
     data: { expectedRole: ['admin', 'user'] },
     children: [
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'category', loadChildren: () => import('./manage-category/manage-category.module').then(m => m.ManageCategoryModule) }
+      { path: 'category', loadChildren: () => import('./manage-category/manage-category.module').then(m => m.ManageCategoryModule) },
+      { path: 'product', loadChildren: () => import('./manage-product/manage-product.module').then(m => m.ManageProductModule) }
     ]
   }
 ];

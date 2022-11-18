@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
       // this.ngxUiLoaderService.stop()
       this.data = res
     }, (err) => {
-      this.ngxUiLoaderService.stop()
+      // this.ngxUiLoaderService.stop()
       const responseMessage = err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

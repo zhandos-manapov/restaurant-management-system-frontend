@@ -1,11 +1,13 @@
 import { emitDistinctChangesOnlyDefaultValue } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CategoryService } from '../services/category.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { GlobalConstants } from '../shared/global-constants';
+import { ICategory } from '../shared/global-interface';
 import { CategoryFormComponent } from './category-form/category-form.component';
 
 @Component({
@@ -28,16 +30,21 @@ export class ManageCategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.ngxUiLoaderService.start()
     this.tableData()
     this.matDialogConfig = new MatDialogConfig()
     this.matDialogConfig.width = '550px'
   }
 
-  tableData() {
+  private tableData() {
     this.categoryService.get().subscribe((res) => {
-      this.dataSource = res
+      // this.ngxUiLoaderService.stop()
+      console.log(res)
+      this.dataSource = new MatTableDataSource(res)
     }, (err) => {
-      const responseMessage = err.error?.message ?? GlobalConstants.genericError
+      // this.ngxUiLoaderService.stop()
+      console.log(err)
+      const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })
   }
@@ -53,7 +60,7 @@ export class ManageCategoryComponent implements OnInit {
     this.handleSubmit()
   }
 
-  onEdit(category: any) {
+  onEdit(category: ICategory) {
     this.matDialogConfig.data = { action: 'update', data: category }
     this.handleSubmit()
   }

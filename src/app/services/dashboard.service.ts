@@ -8,14 +8,12 @@ import { IDashboardDetails } from '../shared/global-interface';
 })
 export class DashboardService {
 
-  private url = environment.apiUrl
+  private url = environment.apiUrl + '/dashboard'
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
 
   getDetails() {
-    return this.http.get<IDashboardDetails>(this.url + '/dashboard/details')
+    return this.http.get<IDashboardDetails>(this.url + '/details')
   }
 
 

@@ -1,0 +1,65 @@
+<div class="content">
+
+  <mat-card class="toolbar">
+    <span class="toolbar-text"><b>Manage Products</b></span>
+    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">Add Product</button>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryName">
+        <mat-header-cell *matHeaderCellDef>Category Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.categoryName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.price}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" matTooltip="Edit" (click)="onEdit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-slide-toggle 
+            color="primary" 
+            (change)="onChange($event.checked, element.id)" 
+            matTooltip="Activate or Deactivate Product">
+          </mat-slide-toggle>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </mat-card>
+
+</div>

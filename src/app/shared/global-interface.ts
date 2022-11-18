@@ -23,3 +23,18 @@ export interface IMenu {
   icon: string
   role: string
 }
+
+export interface ICategory {
+  id: number
+  name: string
+}
+
+export interface IProduct {
+  id: number
+  name: string
+  categoryId: number
+  categoryName: string
+  description: string
+  price: number
+  status: string
+}

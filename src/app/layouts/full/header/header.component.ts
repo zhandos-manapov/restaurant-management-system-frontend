@@ -22,11 +22,9 @@ export class HeaderComponent implements OnInit {
     this.matDialogConfig = new MatDialogConfig()
   }
 
-  logout(){
+  logout() {
     const matDialogConfig = new MatDialogConfig()
-    matDialogConfig.data = {
-      message: 'Sign Out '
-    }
+    matDialogConfig.data = { message: 'Sign Out ' }
     const matDialogRef = this.matDialog.open(ConfirmationComponent, matDialogConfig)
     const subscription = matDialogRef.componentInstance.statusChangeEvent.subscribe((user) => {
       matDialogRef.close()
@@ -35,7 +33,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  changePassword(){
+  changePassword() {
     this.matDialog.open(ChangePasswordComponent, this.matDialogConfig)
   }
 
