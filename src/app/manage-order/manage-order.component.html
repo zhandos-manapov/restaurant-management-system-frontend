@@ -1,0 +1,75 @@
+<div class="content">
+
+  <mat-card class="toolbar">
+    <span class="toolbar-text"><b>Manage Products</b></span>
+    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">Add Product</button>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef>Index</mat-header-cell>
+        <mat-cell *matCellDef="let i = index;">{{i}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="contactNumber">
+        <mat-header-cell *matHeaderCellDef>Contact Number</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.contactNumber}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentMethod">
+        <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.paymentMethod}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdBy">
+        <mat-header-cell *matHeaderCellDef>Created By</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.createdBy}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.total}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" matTooltip="Edit" (click)="onEdit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </mat-card>
+
+</div>

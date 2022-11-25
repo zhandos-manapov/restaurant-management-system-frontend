@@ -5,6 +5,10 @@ export abstract class GlobalConstants {
 
   public static unauthorized = 'You are not authorized to access this page.'
 
+  public static productExistError = 'Product already exist.'
+
+  public static productAdded = 'Product added successfully.'
+
   //Regex
   public static nameRegex = '[a-zA-Z0-9 ]*'
 
@@ -19,7 +23,8 @@ export abstract class GlobalConstants {
   public static readonly MENUITEMS: IMenu[] = [
     { state: 'dashboard', name: 'Dashboard', icon: 'dashboard', role: '' },
     { state: 'category', name: 'Manage Category', icon: 'category', role: 'admin' },
-    { state: 'product', name: 'Manage Product', icon: 'inventory_2', role: 'admin'}
+    { state: 'product', name: 'Manage Product', icon: 'inventory_2', role: 'admin' },
+    { state: 'order', name: 'Manage Order', icon: 'list_alt', role: '' }
   ]
 
 }
