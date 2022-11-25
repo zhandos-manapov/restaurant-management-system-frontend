@@ -45,7 +45,6 @@ export class ChangePasswordComponent implements OnInit {
       const responseMessage = res.message
       this.snackbarService.openSnackBar(responseMessage, 'success')
     }, (err) => {
-      console.log(err)
       this.ngxUiLoaderService.stop()
       const responseMessage = err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)

@@ -39,17 +39,15 @@ export class ManageOrderComponent implements OnInit {
     // this.ngxUiLoaderService.start()
     this.tableData()
     this.matDialogConfig = new MatDialogConfig()
-    this.matDialogConfig.width = '600px'
+    this.matDialogConfig.width = '1000px'
   }
 
   private tableData() {
     this.billService.getBills().subscribe((res) => {
       // this.ngxUiLoaderService.stop()
-      console.log(res)
       this.dataSource = new MatTableDataSource(res)
     }, (err) => {
       // this.ngxUiLoaderService.stop()
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })
@@ -88,12 +86,10 @@ export class ManageOrderComponent implements OnInit {
 
   deleteBill(id: number) {
     this.billService.delete(id).subscribe((res) => {
-      console.log(res)
       this.tableData()
       const responseMessage = res.message
       this.snackbarService.openSnackBar(responseMessage, 'success')
     }, (err) => {
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

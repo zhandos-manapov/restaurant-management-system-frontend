@@ -10,7 +10,7 @@
 
       <mat-form-field appearance="fill" fxFlex>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" type="name" required>
+        <input matInput formControlName="name" type="text" required>
         <mat-error *ngIf="productForm.controls['name'].touched && productForm.controls['name'].invalid">
           <span *ngIf="productForm.controls['name'].errors?.['required']">This field is mandatory.</span>
         </mat-error>

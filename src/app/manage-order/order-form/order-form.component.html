@@ -1,1 +1,153 @@
-<p>order-form works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <span class="title-center">Edit order</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="orderForm">
+
+    <div class="customer-details">
+      <span><b>Customer Details</b></span>
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text" required>
+        <mat-error *ngIf="orderForm.controls['name'].touched && orderForm.controls['name'].invalid">
+          <span *ngIf="orderForm.controls['name'].errors?.['required']">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" required>
+        <mat-error *ngIf="orderForm.controls['email'].touched && orderForm.controls['email'].invalid">
+          <span *ngIf="orderForm.controls['email'].errors?.['required']">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Contact Number</mat-label>
+        <input matInput formControlName="contactNumber" type="text" required>
+        <mat-error *ngIf="orderForm.controls['contactNumber'].touched && orderForm.controls['contactNumber'].invalid">
+          <span *ngIf="orderForm.controls['contactNumber'].errors?.['required']">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Payment Method</mat-label>
+        <mat-select formControlName="paymentMethod">
+          <mat-option value="Cash">Cash</mat-option>
+          <mat-option value="Credit Card">Credit Card</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="select-product">
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" (selectionChange)="getProductsByCategory($event.value)">
+          <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Product</mat-label>
+        <mat-select formControlName="product" (selectionChange)="getProductDetails($event.value)">
+          <mat-option *ngFor="let product of products" [value]="product">{{product.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" fxFlex>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" type="text" required readonly>
+        <mat-error *ngIf="orderForm.controls['price'].touched && orderForm.controls['price'].invalid">
+          <span *ngIf="orderForm.controls['price'].errors?.['required']">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="numbers">
+
+        <mat-form-field appearance="fill" fxFlex>
+          <mat-label>Quantity</mat-label>
+          <input matInput formControlName="quantity" type="number" min="0" required (change)="setQuantity($event)">
+          <mat-error *ngIf="orderForm.controls['quantity'].touched && orderForm.controls['quantity'].invalid">
+            <span *ngIf="orderForm.controls['quantity'].errors?.['required']">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" fxFlex>
+          <mat-label>Total</mat-label>
+          <input matInput formControlName="total" type="number" required readonly>
+          <mat-error *ngIf="orderForm.controls['total'].touched && orderForm.controls['total'].invalid">
+            <span *ngIf="orderForm.controls['total'].errors?.['required']">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+  </form>
+
+  <div class="button-wrapper">
+    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">Add product</button>
+  </div>
+
+  <div class="table">
+    <mat-card>
+      <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.category}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.price}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.quantity}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.total}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index">
+            <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(i, element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+    </mat-card>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!orderForm.valid">
+    Submit
+  </button>
+
+  <button mat-raised-button color="primary" mat-dialog-close>
+    Close
+  </button>
+</mat-dialog-actions>

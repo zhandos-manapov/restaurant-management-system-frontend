@@ -5,8 +5,6 @@ export abstract class GlobalConstants {
 
   public static unauthorized = 'You are not authorized to access this page.'
 
-  public static productExistError = 'Product already exist.'
-
   public static productAdded = 'Product added successfully.'
 
   //Regex

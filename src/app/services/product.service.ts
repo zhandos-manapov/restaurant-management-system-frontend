@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ImportProvidersSource, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IProduct, IResponse } from '../shared/global-interface';
 
@@ -34,11 +34,11 @@ export class ProductService {
   }
 
   getByCategoryId(id: number) {
-    return this.http.get(this.url + '/getByCategory/' + id)
+    return this.http.get<IProduct[]>(this.url + '/getByCategory/' + id)
   }
 
   getById(id: number) {
-    return this.http.get(this.url + '/getById/' + id)
+    return this.http.get<IProduct>(this.url + '/getById/' + id)
   }
 
 

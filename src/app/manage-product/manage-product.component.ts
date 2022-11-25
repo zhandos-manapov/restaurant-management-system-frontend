@@ -40,11 +40,9 @@ export class ManageProductComponent implements OnInit {
   private tableData() {
     this.productService.get().subscribe((res) => {
       // this.ngxUiLoaderService.stop()
-      console.log(res)
       this.dataSource = new MatTableDataSource(res)
     }, (err) => {
       // this.ngxUiLoaderService.stop()
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })
@@ -83,12 +81,10 @@ export class ManageProductComponent implements OnInit {
 
   deleteProduct(id: number) {
     this.productService.delete(id).subscribe((res) => {
-      console.log(res)
       this.tableData()
       const responseMessage = res.message
       this.snackbarService.openSnackBar(responseMessage, 'success')
     }, (err) => {
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

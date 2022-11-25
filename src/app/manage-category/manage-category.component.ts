@@ -39,11 +39,9 @@ export class ManageCategoryComponent implements OnInit {
   private tableData() {
     this.categoryService.get().subscribe((res) => {
       // this.ngxUiLoaderService.stop()
-      console.log(res)
       this.dataSource = new MatTableDataSource(res)
     }, (err) => {
       // this.ngxUiLoaderService.stop()
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

@@ -43,10 +43,8 @@ export class ProductFormComponent implements OnInit {
 
   private getCategories() {
     this.categoryService.get().subscribe((res) => {
-      console.log(res)
       this.categories = res
     }, (err) => {
-      console.log(err)
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

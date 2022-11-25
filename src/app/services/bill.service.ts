@@ -25,6 +25,10 @@ export class BillService {
     return this.http.get<IBill[]>(this.url + '/getBills')
   }
 
+  update(bill: any){
+    return this.http.patch<IResponse>(this.url + '/update', bill, this.options)
+  }
+
   delete(id: number){
     return this.http.delete<IResponse>(this.url + '/delete/' + id, this.options)
   }
