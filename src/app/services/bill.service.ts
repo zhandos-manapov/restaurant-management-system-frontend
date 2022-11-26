@@ -13,8 +13,8 @@ export class BillService {
 
   constructor(private http: HttpClient) { }
 
-  generateReport(data: any) {
-    return this.http.post(this.url + '/generateReport', data)
+  add(data: any) {
+    return this.http.post<IResponse>(this.url + '/add', data)
   }
 
   getPdf(data: any) {

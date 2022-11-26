@@ -12,6 +12,7 @@ import { GlobalConstants } from 'src/app/shared/global-constants';
 import { IBill, ICategory } from 'src/app/shared/global-interface';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-manage-order',
@@ -20,7 +21,7 @@ import { OrderFormComponent } from './order-form/order-form.component';
 })
 export class ManageOrderComponent implements OnInit {
 
-  displayedColumns = ['index', 'name', 'email', 'contactNumber', 'paymentMethod', 'createdBy', 'total', 'edit']
+  displayedColumns = ['index', 'name', 'email', 'contactNumber', 'paymentMethod', 'createdBy', 'total', 'edit', 'print']
   dataSource!: MatTableDataSource<IBill>
   matDialogConfig!: MatDialogConfig
 
@@ -64,11 +65,11 @@ export class ManageOrderComponent implements OnInit {
   }
 
   onEdit(bill: IBill) {
-    this.matDialogConfig.data = { action: 'edit', data: bill}
+    this.matDialogConfig.data = { action: 'edit', data: bill }
     this.handleSubmit()
   }
 
-  handleSubmit(){
+  handleSubmit() {
     const dialogRef = this.matDialog.open(OrderFormComponent, this.matDialogConfig)
     this.router.events.subscribe(() => dialogRef.close())
     const subscription = dialogRef.componentInstance.submitEvent.subscribe(() => this.tableData())
@@ -90,6 +91,18 @@ export class ManageOrderComponent implements OnInit {
       const responseMessage = res.message
       this.snackbarService.openSnackBar(responseMessage, 'success')
     }, (err) => {
+      const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
+      this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
+    })
+  }
+
+  printBill(bill: IBill) {
+    this.ngxUiLoaderService.start()
+    this.billService.getPdf(bill).subscribe((res) => {
+      saveAs(res, bill.uuid + '.pdf')
+      this.ngxUiLoaderService.stop()
+    }, (err) => {
+      this.ngxUiLoaderService.stop()
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

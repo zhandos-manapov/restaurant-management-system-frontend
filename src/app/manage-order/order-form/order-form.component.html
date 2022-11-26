@@ -93,7 +93,7 @@
   </form>
 
   <div class="button-wrapper">
-    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">Add product</button>
+    <button mat-flat-button color="primary" (click)="onAdd()" [disabled]="validateAddProduct()" class="add-button">Add product</button>
   </div>
 
   <div class="table">
@@ -143,7 +143,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!orderForm.valid">
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!orderForm.valid && !deleted">
     Submit
   </button>
 

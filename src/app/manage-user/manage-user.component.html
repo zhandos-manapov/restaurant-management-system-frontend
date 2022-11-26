@@ -2,7 +2,6 @@
 
   <mat-card class="toolbar">
     <span class="toolbar-text"><b>Manage Order</b></span>
-    <button mat-flat-button color="primary" (click)="onAdd()" class="add-button">New Order</button>
   </mat-card>
 
   <br>
@@ -39,39 +38,12 @@
         <mat-cell *matCellDef="let element">{{element.contactNumber}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="paymentMethod">
-        <mat-header-cell *matHeaderCellDef>Payment Method</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.paymentMethod}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="createdBy">
-        <mat-header-cell *matHeaderCellDef>Created By</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.createdBy}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="total">
-        <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.total}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" matTooltip="Edit" (click)="onEdit(element)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(element)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="print">
-        <mat-header-cell *matHeaderCellDef>Print</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button mat-flat-button color="primary" (click)="printBill(element)">
-            Print
-          </button>
+          <mat-slide-toggle color="primary" (change)="onChange($event.checked, element.id)"
+            matTooltip="Activate or Deactivate Product" [checked]="element.status">
+          </mat-slide-toggle>
         </mat-cell>
       </ng-container>
 

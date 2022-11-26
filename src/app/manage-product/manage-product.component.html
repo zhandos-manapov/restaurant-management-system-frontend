@@ -48,10 +48,8 @@
           <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(element)">
             <mat-icon>delete</mat-icon>
           </button>
-          <mat-slide-toggle 
-            color="primary" 
-            (change)="onChange($event.checked, element.id)" 
-            matTooltip="Activate or Deactivate Product">
+          <mat-slide-toggle color="primary" (change)="onChange($event.checked, element.id)"
+            matTooltip="Activate or Deactivate Product" [checked]="element.status">
           </mat-slide-toggle>
         </mat-cell>
       </ng-container>

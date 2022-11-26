@@ -15,7 +15,8 @@ const routes: Routes = [
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'category', loadChildren: () => import('./manage-category/manage-category.module').then(m => m.ManageCategoryModule) },
       { path: 'product', loadChildren: () => import('./manage-product/manage-product.module').then(m => m.ManageProductModule) },
-      { path: 'order', loadChildren: () => import('./manage-order/manage-order.module').then(m => m.ManageOrderModule) }
+      { path: 'order', loadChildren: () => import('./manage-order/manage-order.module').then(m => m.ManageOrderModule) },
+      { path: 'user', loadChildren: () => import('./manage-user/manage-user.module').then(m => m.ManageUserModule)}
     ]
   }
 ];

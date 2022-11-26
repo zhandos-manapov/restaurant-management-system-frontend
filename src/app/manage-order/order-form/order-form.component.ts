@@ -2,13 +2,13 @@ import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ignoreElements } from 'rxjs';
+import { ignoreElements, Observable } from 'rxjs';
 import { BillService } from 'src/app/services/bill.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
-import { ICategory, IProduct } from 'src/app/shared/global-interface';
+import { ICategory, IProduct, IResponse } from 'src/app/shared/global-interface';
 
 @Component({
   selector: 'app-order-form',
@@ -20,13 +20,13 @@ export class OrderFormComponent implements OnInit {
 
   displayedColumns = ['name', 'category', 'price', 'quantity', 'total', 'edit']
   orderForm!: FormGroup
-  dialogAction = 'add'
   categories: ICategory[] = []
   products: IProduct[] = []
   price!: number
-  billTotal: number = 0
-  billData: any
+  billTotal: number
   dataSource!: MatTableDataSource<any>
+  deleted: boolean
+  dialogAction: string
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
@@ -36,7 +36,11 @@ export class OrderFormComponent implements OnInit {
     private productService: ProductService,
     public matDialogRef: MatDialogRef<OrderFormComponent>,
     private snackbarService: SnackbarService
-  ) { }
+  ) {
+    this.deleted = false
+    this.billTotal = 0
+    this.dialogAction = 'add'
+  }
 
   ngOnInit(): void {
     this.orderForm = this.fb.group({
@@ -51,14 +55,17 @@ export class OrderFormComponent implements OnInit {
       total: [0, [Validators.required]]
     })
     this.dialogAction = this.dialogData.action
+    let productDetails
     if (this.dialogAction === 'edit') {
+      console.log(this.dialogData.data);
+      
       this.orderForm.patchValue({ ...this.dialogData.data, total: 0 })
       this.billTotal = this.dialogData.data.total
-      this.billData = this.dialogData.data
+      productDetails = JSON.parse(this.dialogData.data.productDetails)
+    } else {
+      productDetails = []
     }
     this.getCategories()
-
-    let productDetails = JSON.parse(this.dialogData.data.productDetails)
     this.dataSource = new MatTableDataSource(productDetails)
   }
 
@@ -160,6 +167,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   onDelete(index: number, element: any) {
+    this.deleted = true
     this.billTotal -= element.total
     this.dataSource.data.splice(index, 1)
     this.dataSource = new MatTableDataSource(this.dataSource.data)
@@ -168,7 +176,7 @@ export class OrderFormComponent implements OnInit {
   onSubmit() {
     let formData = { ...this.orderForm.value }
     let data = {
-      id: this.billData.id,
+      id: -1,
       name: formData.name,
       email: formData.email,
       contactNumber: formData.contactNumber,
@@ -176,7 +184,15 @@ export class OrderFormComponent implements OnInit {
       total: this.billTotal,
       productDetails: JSON.stringify(this.dataSource.data)
     }
-    this.billService.update(data).subscribe((res) => {
+    let obs: Observable<IResponse>
+    if (this.dialogAction === 'edit') {
+      data.id = this.dialogData.data.id
+      obs = this.billService.update(data)
+    } else {
+      obs = this.billService.add(data)
+    }
+
+    obs.subscribe((res) => {
       this.submitEvent.emit()
       this.matDialogRef.close()
       const responseMessage = res.message
@@ -186,6 +202,7 @@ export class OrderFormComponent implements OnInit {
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })
   }
+
 
 
 

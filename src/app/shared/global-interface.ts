@@ -51,3 +51,13 @@ export interface IBill {
   productDetails: string
   createdBy: string
 }
+
+
+export interface IUser {
+  id: number
+  name: string
+  contactNumber: string
+  email: string
+  status: string
+  role: string
+}
