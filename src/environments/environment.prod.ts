@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://restaurant-management-system-production.up.railway.app'
 };
