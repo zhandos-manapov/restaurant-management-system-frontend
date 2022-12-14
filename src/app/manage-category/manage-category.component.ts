@@ -30,7 +30,7 @@ export class ManageCategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.ngxUiLoaderService.start()
+    this.ngxUiLoaderService.start()
     this.tableData()
     this.matDialogConfig = new MatDialogConfig()
     this.matDialogConfig.width = '550px'
@@ -38,10 +38,10 @@ export class ManageCategoryComponent implements OnInit {
 
   private tableData() {
     this.categoryService.get().subscribe((res) => {
-      // this.ngxUiLoaderService.stop()
+      this.ngxUiLoaderService.stop()
       this.dataSource = new MatTableDataSource(res)
     }, (err) => {
-      // this.ngxUiLoaderService.stop()
+      this.ngxUiLoaderService.stop()
       const responseMessage = err.message ?? err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })

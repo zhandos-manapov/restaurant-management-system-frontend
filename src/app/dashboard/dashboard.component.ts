@@ -21,16 +21,16 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.ngxUiLoaderService.start()
+    this.ngxUiLoaderService.start()
     this.dashboardData()
   }
 
   private dashboardData() {
     this.dashboardService.getDetails().subscribe((res: IDashboardDetails) => {
-      // this.ngxUiLoaderService.stop()
+      this.ngxUiLoaderService.stop()
       this.data = res
     }, (err) => {
-      // this.ngxUiLoaderService.stop()
+      this.ngxUiLoaderService.stop()
       const responseMessage = err.error?.message ?? GlobalConstants.genericError
       this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
     })
