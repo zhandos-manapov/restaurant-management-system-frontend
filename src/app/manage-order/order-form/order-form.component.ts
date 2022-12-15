@@ -61,7 +61,7 @@ export class OrderFormComponent implements OnInit {
       
       this.orderForm.patchValue({ ...this.dialogData.data, total: 0 })
       this.billTotal = this.dialogData.data.total
-      productDetails = JSON.parse(this.dialogData.data.productDetails)
+      productDetails = this.dialogData.data.productDetails
     } else {
       productDetails = []
     }
