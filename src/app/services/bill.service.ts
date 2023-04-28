@@ -14,22 +14,22 @@ export class BillService {
   constructor(private http: HttpClient) { }
 
   add(data: any) {
-    return this.http.post<IResponse>(this.url + '/add', data)
+    return this.http.post<IResponse>(this.url, data)
   }
 
   getPdf(data: any) {
-    return this.http.post(this.url + '/getPdf', data, { responseType: 'blob' })
+    return this.http.post(this.url + '/pdf', data, { responseType: 'blob' })
   }
 
   getBills() {
-    return this.http.get<IBill[]>(this.url + '/getBills')
+    return this.http.get<IBill[]>(this.url)
   }
 
   update(bill: any){
-    return this.http.patch<IResponse>(this.url + '/update', bill, this.options)
+    return this.http.patch<IResponse>(`${this.url}/${bill.id}`, bill, this.options)
   }
 
   delete(id: number){
-    return this.http.delete<IResponse>(this.url + '/delete/' + id, this.options)
+    return this.http.delete<IResponse>(`${this.url}/${id}`, this.options)
   }
 }

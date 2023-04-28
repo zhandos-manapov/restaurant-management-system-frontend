@@ -14,18 +14,14 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   add(data: any) {
-    return this.http.post<IResponse>(this.url + '/add', data, this.options)
+    return this.http.post<IResponse>(this.url, data, this.options)
   }
 
   update(data: any) {
-    return this.http.patch<IResponse>(this.url + '/update', data, this.options)
+    return this.http.patch<IResponse>(this.url + `/${data.id}`, data, this.options)
   }
 
   get() {
-    return this.http.get<ICategory[]>(this.url + '/get')
+    return this.http.get<ICategory[]>(this.url)
   }
-
-
-
-
 }

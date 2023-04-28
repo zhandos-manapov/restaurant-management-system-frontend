@@ -46,8 +46,8 @@ export class OrderFormComponent implements OnInit {
     this.orderForm = this.fb.group({
       name: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      contactNumber: [null, [Validators.required]],
-      paymentMethod: [null, [Validators.required]],
+      contact_number: [null, [Validators.required]],
+      payment_method: [null, [Validators.required]],
       category: [null, [Validators.required]],
       product: [null, [Validators.required]],
       quantity: [0, [Validators.required]],
@@ -55,18 +55,17 @@ export class OrderFormComponent implements OnInit {
       total: [0, [Validators.required]]
     })
     this.dialogAction = this.dialogData.action
-    let productDetails
+    let product_details
     if (this.dialogAction === 'edit') {
       console.log(this.dialogData.data);
-      
       this.orderForm.patchValue({ ...this.dialogData.data, total: 0 })
       this.billTotal = this.dialogData.data.total
-      productDetails = JSON.parse(this.dialogData.data.productDetails)
+      product_details = this.dialogData.data.product_details
     } else {
-      productDetails = []
+      product_details = []
     }
     this.getCategories()
-    this.dataSource = new MatTableDataSource(productDetails)
+    this.dataSource = new MatTableDataSource(product_details)
   }
 
   private getCategories() {
@@ -134,9 +133,9 @@ export class OrderFormComponent implements OnInit {
     if (this.billTotal === 0 ||
       this.orderForm.value['name'] === null ||
       this.orderForm.value['email'] === null ||
-      this.orderForm.value['contactNumber'] === null ||
-      this.orderForm.value['paymentMethod'] === null ||
-      !(this.orderForm.controls['contactNumber'].valid) ||
+      this.orderForm.value['contact_number'] === null ||
+      this.orderForm.value['payment_method'] === null ||
+      !(this.orderForm.controls['contact_number'].valid) ||
       !(this.orderForm.controls['email'].valid))
       return true
     return false
@@ -179,12 +178,12 @@ export class OrderFormComponent implements OnInit {
       id: -1,
       name: formData.name,
       email: formData.email,
-      contactNumber: formData.contactNumber,
-      paymentMethod: formData.paymentMethod,
+      contact_number: formData.contact_number,
+      payment_method: formData.payment_method,
       total: this.billTotal,
-      productDetails: JSON.stringify(this.dataSource.data)
+      product_details: JSON.stringify(this.dataSource.data)
     }
-    let obs: Observable<IResponse>
+    let obs: Observable<IResponse>;
     if (this.dialogAction === 'edit') {
       data.id = this.dialogData.data.id
       obs = this.billService.update(data)

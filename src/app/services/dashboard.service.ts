@@ -13,7 +13,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getDetails() {
-    return this.http.get<IDashboardDetails>(this.url + '/details')
+    return this.http.get<IDashboardDetails>(this.url)
   }
 
 

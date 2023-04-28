@@ -24,9 +24,9 @@
         <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="categoryName">
+      <ng-container matColumnDef="category_name">
         <mat-header-cell *matHeaderCellDef>Category Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.categoryName}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.category_name}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -48,7 +48,7 @@
           <button mat-icon-button color="primary" matTooltip="Delete" (click)="onDelete(element)">
             <mat-icon>delete</mat-icon>
           </button>
-          <mat-slide-toggle color="primary" (change)="onChange($event.checked, element.id)"
+          <mat-slide-toggle color="primary" (change)="onChange($event.checked, element)"
             matTooltip="Activate or Deactivate Product" [checked]="element.status">
           </mat-slide-toggle>
         </mat-cell>

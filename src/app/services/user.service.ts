@@ -8,13 +8,13 @@ import { ILoginResponse, IResponse, IUser } from '../shared/global-interface';
 })
 export class UserService {
 
-  private url = environment.apiUrl + '/user'
+  private url = environment.apiUrl
   private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') }
 
   constructor(private http: HttpClient) { }
 
   signUp(data: any) {
-    return this.http.post<IResponse>(this.url + '/signup', data, this.options)
+    return this.http.post<IResponse>(this.url + '/auth/signup', data, this.options)
   }
 
   forgotPassword(data: any) {
@@ -22,23 +22,23 @@ export class UserService {
   }
 
   login(data: any) {
-    return this.http.post<ILoginResponse>(this.url + '/login', data, this.options)
+    return this.http.post<ILoginResponse>(this.url + '/auth/signin', data, this.options)
   }
 
   checkToken() {
-    return this.http.get(this.url + '/checkToken')
+    return this.http.get(this.url + '/auth/check')
   }
 
   changePassword(data: any) {
-    return this.http.post<IResponse>(this.url + '/changePassword', data, this.options)
+    return this.http.post<IResponse>(this.url + '/user/password', data, this.options)
   }
 
   getUsers() {
-    return this.http.get<IUser[]>(this.url + '/get')
+    return this.http.get<IUser[]>(this.url + '/user', this.options)
   }
 
   update(user: any) {
-    return this.http.patch<IResponse>(this.url + '/update', user, this.options)
+    return this.http.patch<IResponse>(this.url + `/user/${user.id}`, user, this.options)
   }
 
 }

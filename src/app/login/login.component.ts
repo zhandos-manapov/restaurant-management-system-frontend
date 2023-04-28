@@ -9,44 +9,45 @@ import { GlobalConstants } from '../shared/global-constants';
 import { ILoginResponse, IResponse } from '../shared/global-interface';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup
+    loginForm!: FormGroup
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private userService: UserService,
-    private snackbarService: SnackbarService,
-    private matDialogRef: MatDialogRef<LoginComponent>,
-    private ngxUiLoaderService: NgxUiLoaderService
-  ) { }
+    constructor(
+        private fb: FormBuilder,
+        private router: Router,
+        private userService: UserService,
+        private snackbarService: SnackbarService,
+        private matDialogRef: MatDialogRef<LoginComponent>,
+        private ngxUiLoaderService: NgxUiLoaderService
+    ) { }
 
-  ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
-      password: [null, [Validators.required]]
-    })
-  }
+    ngOnInit(): void {
+        this.loginForm = this.fb.group({
+            email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
+            password: [null, [Validators.required]]
+        })
+    }
 
-  onSubmit() {
-    this.ngxUiLoaderService.start()
-    const formData = { ...this.loginForm.value }
-    this.userService.login(formData).subscribe((res: ILoginResponse) => {
-      this.ngxUiLoaderService.stop()
-      this.matDialogRef.close()
-      localStorage.setItem('token', res.token)
-      this.router.navigate(['/cafe/dashboard'])
-    }, (err) => {
-      this.ngxUiLoaderService.stop()
-      const responseMessage = err.error.message ?? GlobalConstants.genericError
-      this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
-    })
-  }
+    onSubmit() {
+        this.ngxUiLoaderService.start()
+        const formData = { ...this.loginForm.value }
+        this.userService.login(formData).subscribe((res: ILoginResponse) => {
+            this.ngxUiLoaderService.stop()
+            this.matDialogRef.close()
+            localStorage.setItem('token', res.token)
+            console.log(res.token)
+            this.router.navigate(['/cafe/dashboard'])
+        }, (err) => {
+            this.ngxUiLoaderService.stop()
+            const responseMessage = err.error.message ?? GlobalConstants.genericError
+            this.snackbarService.openSnackBar(responseMessage, GlobalConstants.error)
+        })
+    }
 
 
 }

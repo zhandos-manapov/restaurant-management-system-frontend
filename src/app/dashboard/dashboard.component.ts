@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getDetails().subscribe((res: IDashboardDetails) => {
       this.ngxUiLoaderService.stop()
       this.data = res
+      console.log(res);
     }, (err) => {
       this.ngxUiLoaderService.stop()
       const responseMessage = err.error?.message ?? GlobalConstants.genericError

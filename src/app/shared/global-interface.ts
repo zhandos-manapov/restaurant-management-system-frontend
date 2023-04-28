@@ -4,7 +4,7 @@ export interface IResponse {
 
 export interface ILoginResponse {
   token: string
-  message?: string
+  expiresIn?: string
 }
 
 export interface IToken {
@@ -12,9 +12,9 @@ export interface IToken {
 }
 
 export interface IDashboardDetails {
-  billCount: number
-  categoryCount: number
-  productCount: number
+  bill_count: number
+  category_count: number
+  product_count: number
 }
 
 export interface IMenu {

@@ -29,15 +29,15 @@
 
       <mat-form-field appearance="fill" fxFlex>
         <mat-label>Contact Number</mat-label>
-        <input matInput formControlName="contactNumber" type="text" required>
-        <mat-error *ngIf="orderForm.controls['contactNumber'].touched && orderForm.controls['contactNumber'].invalid">
-          <span *ngIf="orderForm.controls['contactNumber'].errors?.['required']">This field is mandatory.</span>
+        <input matInput formControlName="contact_number" type="text" required>
+        <mat-error *ngIf="orderForm.controls['contact_number'].touched && orderForm.controls['contact_number'].invalid">
+          <span *ngIf="orderForm.controls['contact_number'].errors?.['required']">This field is mandatory.</span>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" fxFlex>
         <mat-label>Payment Method</mat-label>
-        <mat-select formControlName="paymentMethod">
+        <mat-select formControlName="payment_method">
           <mat-option value="Cash">Cash</mat-option>
           <mat-option value="Credit Card">Credit Card</mat-option>
         </mat-select>

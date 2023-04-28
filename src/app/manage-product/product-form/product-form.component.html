@@ -26,7 +26,7 @@
 
       <mat-form-field appearance="fill" fxFlex>
         <mat-label>Category</mat-label>
-        <mat-select formControlName="categoryId">
+        <mat-select formControlName="category_id">
           <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>

@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { BillService } from 'src/app/services/bill.service';
-import { CategoryService } from 'src/app/services/category.service';
-import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
-import { IBill, ICategory } from 'src/app/shared/global-interface';
+import { IBill } from 'src/app/shared/global-interface';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { saveAs } from 'file-saver';
@@ -21,15 +18,12 @@ import { saveAs } from 'file-saver';
 })
 export class ManageOrderComponent implements OnInit {
 
-  displayedColumns = ['index', 'name', 'email', 'contactNumber', 'paymentMethod', 'createdBy', 'total', 'edit', 'print']
+  displayedColumns = ['index', 'name', 'email', 'contact_number', 'payment_method', 'created_by', 'total', 'edit', 'print']
   dataSource!: MatTableDataSource<IBill>
   matDialogConfig!: MatDialogConfig
 
   constructor(
-    private fb: FormBuilder,
     private billService: BillService,
-    private productService: ProductService,
-    private categoryService: CategoryService,
     private ngxUiLoaderService: NgxUiLoaderService,
     private matDialog: MatDialog,
     private snackbarService: SnackbarService,
