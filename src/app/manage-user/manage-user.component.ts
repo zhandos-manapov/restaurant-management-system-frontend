@@ -13,7 +13,7 @@ import { IUser } from '../shared/global-interface';
 })
 export class ManageUserComponent implements OnInit {
 
-  displayedColumns = ['index', 'name', 'email', 'contactNumber', 'status']
+  displayedColumns = ['index', 'name', 'email', 'contact_number', 'status']
   dataSource!: MatTableDataSource<IUser>
 
   constructor(

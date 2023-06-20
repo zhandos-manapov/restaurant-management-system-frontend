@@ -45,7 +45,7 @@ export interface IBill {
   uuid: string
   name: string
   email: string
-  contactNumber: string
+  contact_number: string
   paymentMethod: string
   total: number
   productDetails: string
@@ -56,7 +56,7 @@ export interface IBill {
 export interface IUser {
   id: number
   name: string
-  contactNumber: string
+  contact_number: string
   email: string
   status: string
   role: string

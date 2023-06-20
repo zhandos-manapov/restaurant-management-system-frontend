@@ -27,10 +27,10 @@
 
       <mat-form-field appearance="fill" fxFlex>
         <mat-label>Contact number</mat-label>
-        <input matInput formControlName="contactNumber" required>
-        <mat-error *ngIf="signupForm.controls['contactNumber'].touched && signupForm.controls['contactNumber'].invalid">
-          <span *ngIf="signupForm.controls['contactNumber'].errors?.['required']">This field is mandatory.</span>
-          <span *ngIf="signupForm.controls['contactNumber'].errors?.['pattern']">This field is invalid.</span>
+        <input matInput formControlName="contact_number" required>
+        <mat-error *ngIf="signupForm.controls['contact_number'].touched && signupForm.controls['contact_number'].invalid">
+          <span *ngIf="signupForm.controls['contact_number'].errors?.['required']">This field is mandatory.</span>
+          <span *ngIf="signupForm.controls['contact_number'].errors?.['pattern']">This field is invalid.</span>
         </mat-error>
       </mat-form-field>
 

@@ -181,7 +181,7 @@ export class OrderFormComponent implements OnInit {
       contact_number: formData.contact_number,
       payment_method: formData.payment_method,
       total: this.billTotal,
-      product_details: JSON.stringify(this.dataSource.data)
+      product_details: this.dataSource.data
     }
     let obs: Observable<IResponse>;
     if (this.dialogAction === 'edit') {
